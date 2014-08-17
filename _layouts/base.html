@@ -1,0 +1,49 @@
+---
+---
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>{{ page.title }}</title>
+		<link rel="stylesheet" href="/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/css/pygments.css">
+		<link rel="stylesheet" href="/css/bootstrap.swordfischer.css">
+		<link rel="start" href="https://cisconotes.swordfischer.me/" title="Home">
+	</head>
+	<body style="padding: 140px 0 70px 0;">
+		<div class="nav navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<ul class="nav nav-tabs navbar-default">
+					{% assign current = page.url | downcase | remove: '.html' | split: '/' %}
+					<li><a title="Home" href="https://swordfischer.me"<i class="fa fa-home"></i> swordfischer.me</a></li>
+					<li {% if current[1] == 'index.html' %}class="active"{% endif %}><a title="Home" href="/">Cisco</a></li>
+					<li {% if current[1] == 'labs' %}class="active"{% endif %}><a title="Labs" href="/labs/">Labs</a></li>
+					<li {% if current[1] == 'notes' %}class="active"{% endif %}><a title="Notes" href="/notes/">Notes</a></li>
+					<li {% if current[1] == 'sheets' %}class="active"{% endif %}><a title="Sheets" href="/sheets/">Command Sheets</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="nav navbar navbar-inverse navbar-fixed-top" style="margin-top: 42px";>
+			<div class="container">
+				<div class="navbar-collapse collapse navbar-responsive-collapse">
+					<ul class="breadcrumb">
+							{% if page.category %}
+							<li><a href="/{{ page.category }}">{{ page.category | capitalize }}</a></li>
+							{% endif %}
+							<li class="active"><a href="{{ page.url }}">{{ page.title }}</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			{{ content }}
+		</div>
+	</div>
+	<div class="nav navbar navbar-inverse navbar-fixed-bottom">
+		<div class="container text-center">
+			<p>This project is maintained by <a href="https://github.com/swordfischer">swordfischer</a></p>
+			<p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/swordfischer">swordfischer</a></small></p>
+		</div>
+	</div>
+	</body>
+</html>

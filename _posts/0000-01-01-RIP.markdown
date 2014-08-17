@@ -1,0 +1,18 @@
+---
+layout: post
+title: RIP (Routing Information Protocol)
+category: sheets
+---
+<div class="col-md-6">
+ <h3>Configs</h3>
+    R(config)# router rip
+</div>
+<div class="col-md-6">
+ <div class="row">
+  <h3>States/Show</h3>
+    R# no auto-summary
+ </div>
+ <div class="row">
+  <h3>Debug</h3>
+ </div>
+</div>

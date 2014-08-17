@@ -1,0 +1,14 @@
+---
+layout: base
+title: Sheets
+---
+<div class="panel panel-default">
+	<div class="panel-heading"><a href="/Notes/">Sheets</a></div>
+	<div class="panel-body"> 
+		<ul class="list-group">
+		{% for rnote in site.categories.sheets %}
+			<li class="list-group-item"><a href="{{ rnote.url }}">{{ rnote.title }}</a></li>
+		{% endfor %}
+		</ul>
+	</div>
+</div>

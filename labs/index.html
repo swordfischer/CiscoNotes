@@ -1,0 +1,14 @@
+---
+layout: base
+title: Labs
+---
+<div class="panel panel-default">
+	<div class="panel-heading"><a href="/Notes/">Labs</a></div>
+	<div class="panel-body"> 
+		<ul class="list-group">
+		{% for rnote in site.categories.labs %}
+			<li class="list-group-item"><a href="{{ rnote.url }}">{{ rnote.title }}</a><span class="badge">{{ rnote.tags }}</span></li>
+		{% endfor %}
+		</ul>
+	</div>
+</div>
