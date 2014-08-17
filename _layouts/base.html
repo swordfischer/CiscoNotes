@@ -27,11 +27,17 @@
 		<div class="nav navbar navbar-inverse navbar-fixed-top" style="margin-top: 42px";>
 			<div class="container">
 				<div class="navbar-collapse collapse navbar-responsive-collapse">
-					<ul class="breadcrumb">
+					<ul class="breadcrumb navbar-left">
 							{% if page.category %}
 							<li><a href="/{{ page.category }}">{{ page.category | capitalize }}</a></li>
 							{% endif %}
 							<li class="active"><a href="{{ page.url }}">{{ page.title }}</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right"> 
+						<li><a class="navbar-brand" title="swordfischer on GitHub" href="https://github.com/swordfischer" target="_blank"><i class="fa fa-github fa-lg"></i></a></li>
+						<li><a class="navbar-brand" title="swordfischer on Twitter" href="https://twitter.com/swordfischer" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
+						<li><a class="navbar-brand" title="swordfischer on LinkedIn" href="http://dk.linkedin.com/in/swordfischer" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a></li>
+						<li><a class="navbar-brand" title="swordfischer on Steam" href="http://steamcommunity.com/id/swordfischer" target="_blank"><i class="fa fa-steam fa-lg"></i></a></li>
 					</ul>
 				</div>
 			</div>
