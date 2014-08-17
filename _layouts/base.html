@@ -14,9 +14,10 @@
 		<div class="nav navbar navbar-default navbar-fixed-top">
 			<div class="container">
 				<ul class="nav nav-tabs navbar-default">
-					{% assign current = page.url | downcase | remove: '.html' | split: '/' %}
+					{% assign current = page.url | downcase | split: '/' %}
 					<li><a title="Home" href="https://swordfischer.me"<i class="fa fa-home"></i> swordfischer.me</a></li>
-					<li {% if current[1] == 'index.html' %}class="active"{% endif %}><a title="Home" href="/">Cisco</a></li>
+					<li><a title="Archive" href="https://swordfischer.me/archive/"<i class="fa fa-archive"></i> archive</a></li>
+					<li {% if current[1] == 'index.html' %}class="active"{% endif %}><a title="Home" href="/">Cisco Notes</a></li>
 					<li {% if current[1] == 'labs' %}class="active"{% endif %}><a title="Labs" href="/labs/">Labs</a></li>
 					<li {% if current[1] == 'notes' %}class="active"{% endif %}><a title="Notes" href="/notes/">Notes</a></li>
 					<li {% if current[1] == 'sheets' %}class="active"{% endif %}><a title="Sheets" href="/sheets/">Command Sheets</a></li>
