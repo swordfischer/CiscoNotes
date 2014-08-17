@@ -1,0 +1,170 @@
+---
+layout: post
+title: All CCNA-2 Commands
+category: notes
+---
+
+#### CCNA-1 and -2 Basic Setup
+	enable
+	configure terminal
+	hostname <NAME>
+	no ip domain-lookup no enable password
+	enable secret class
+	banner motd #<text>#
+
+	line con 0
+	  logging synchronous
+	  exec-timeout <min> [<sec>]
+	  password cisco
+	  login
+
+	int <int>
+	  description <TEXT>
+	  ip address <IP> <SM>
+	  clock rate ... ! only DCE
+	  no shutdown
+
+	end
+	wr
+	or
+	copy running-config startup-config
+
+#### Miscellaneous
+
+	traceroute <dest IP>
+	ping <dest IP>
+	! extended ping:
+	ping <ENTER>
+
+	! on Windows
+	netstat /?
+	ftp
+	  get
+	  dir
+	  quit
+	  exit
+	route print
+	telnet
+	ipconfig
+	arp -a
+	arp -d ! flush ARP table
+
+	! on Linux
+	netstat --help
+	route
+	telnet
+	ifconfig
+	arp -a
+
+	! on Cisco IOS
+	show version
+	show ip interface brief
+	show hosts
+	show mac-address-table
+	show interface <int>
+	show startup-config
+	show running-config
+	show cdp neighbor [detail]
+	debug ip routing
+
+	console connection 9600,8,N,1,N
+
+#### RIP Protocol
+**Administrative Distance:** 120  
+**v1**: 255.255.255.255  
+**v2**: 224.0.0.9  
+
+	router rip
+	  version 2
+	  no auto-summary
+	  passive-interface <int>
+	  network <network>
+	  default-information originate
+
+**Note:** sometimes it is necessary to clear the RIP routing process before the default-information originate command will work  
+**First, try the command clear ip route**. Sometimes this does not work with RIP.  
+If it's still not working, save the configuration and then **reload routers**. Doing this will reset the hardware and both routers will restart the RIP routing process
+
+	show ip protocols
+	show ip route
+	clear ip route *
+
+#### EIGRP Protocol
+**Administrative Distance:** 90  
+224.0.0.10  
+
+	router eigrp <AS>
+	  no auto-summary
+	  network <NET> [<WM>]
+	  passive-interface <int>
+	  redistribute static
+
+	int S x/x
+	  bandwidth <kbits>
+	  ip summary-address eigrp <AS> <net> <summary-mask>
+
+	show ip eigrp neighbors
+	show ip eigro topology [network]
+	show ip protocols
+	show ip route
+
+#### OSPF Protocol
+**Administrative Distance:** //110//
+**Default:** //224.0.0.5//
+**Designated Router/Backup Designated Router:** //224.0.0.6//
+
+	router ospf <process-id>
+	  router-id <id in DDN>
+	  passive-interface <int>
+	  network <net> <wm> area <area no>
+	  default-information originate
+	! Increase reference bandwidth to 10GigE
+	  auto-cost reference-bandwidth 10000
+
+	show ip ospf neighbor
+	show ip ospf interface
+	show ip protocols
+	show ip route
+
+	clear ip ospf process
+
+##### Link Cost, Hello and Dead Interval
+	int s x/x
+	  bandwidth <kbits>
+	  ! cost = 10^8/B
+	  ! or
+	  ip ospf cost <value>
+
+	  ip ospf hello-interval <value>
+	  ip ospf dead-interval <value>
+
+##### Link Priority
+**Default is 1**
+If 0, do not participate in the DR election.  
+Remember to clear ip ospf process
+
+	int fa0/0
+	  ip ospf priority <value>
+
+#### Static Routes
+
+	ip route <network> <sm> <exit-int> <next-hop-IP>
+
+	! default static route
+	ip route 0.0.0.0 0.0.0.0 <exit-int> <next-hop-IP>
+
+
+#### Document to text-file
+
+	show running-config
+	show ip route
+	show ip interface brief
+	show ip protocols
+
+#### Backup config or IOS
+
+	copy running-config tftp
+	 ! erase startup-config
+	 ! basic ip..
+	copy tftp startup-config
+	copy flash tftp
