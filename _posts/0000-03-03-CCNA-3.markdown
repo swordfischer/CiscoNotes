@@ -1,0 +1,155 @@
+---
+layout: post
+title: All CCNA-3 Commands
+category: notes
+---
+
+#### Show Commands
+
+	show interface <vlan>
+	show interface <int> [status]
+	show vlan
+	dir flash:
+	show flash:
+
+#### Speed Settings on Ports
+
+	int fa0/x
+	  speed 100
+	  duplex full
+
+#### Management Module in Layer 2 Switch
+
+	interface vlan <vlan-id>
+	  ip address ...
+
+	ip default-gateway <GW>
+
+#### Create VLANs
+
+	vlan <vlan-id>
+	  name <name>
+
+#### VLAN on Port
+
+	interface range fa0/x-y
+	! or
+	interface range fa0/x, fa0/y, fa0/z
+	  description ...
+	  switchport mode access
+	  switchport access vlan <vlan-id>
+
+#### Create Trunks (802.1Q)
+
+	interface range fa0/x-y
+	  switchport mode <trunk|dynamic auto|dynamic desirable>
+	  switchport trunk native vlan 99
+	  switchport trunk allowed vlan ...
+	  no shutdown
+
+	show interface trunk
+
+#### VTP
+
+	vtp mode <server|client|transparent>
+	vtp domain <domain>
+	vtp password <PW>
+	vtp pruning
+
+	show vtp status
+	show vtp password
+
+#### Managing the MAC Address Table
+
+show mac-address-table [dynamic]
+show mac-address-table <mac address>
+clear mac-address-table dynamic
+
+mac-address-table static <mac-address> vlan <vlan-id> interface fa0/x
+
+#### Port Security
+
+	interface fa0/x
+	  switchport port-security ! required
+	  switchport port-security maximum 2
+	  switchport port-security mac-address sticky
+	  switchport port-security mac-address sticky <mac-address>
+	  switchport port-security violation <shutdown|restrict|protect>
+
+	show port-security
+
+#### Spanning-Tree (STP)
+
+**Default Priority:** 32768  
+**Increments of:** 4096  
+**4096 -> root**  
+**16384 -> secondary root**  
+
+	spanning-tree vlan <vlan-id> priority <no>
+
+	spanning-tree mode <pvst|rapid-pvst>
+
+	! not in labs but in online
+	spanning-tree [mode|portfast|vlan]
+	spanning-tree vlan <vlan-id> root <primary|secondary>
+	! primary = 32768-8192 = 24576
+	! secondary = 32768-4096 = 28672
+
+	spanning-tree portfast default
+	! or 
+	interface fa0/x
+	  spanning-tree portfast
+	  spanning-tree port-priority <no>
+
+	spanning-tree vlan <vlan-id> root primary diameter 5
+
+	show spanning-tree [vlan <vlan-id>]
+	show spanning-tree summary
+
+	debug spanning-tree events
+
+#### Inter-VLAN Routing (Router Setup)
+
+	interface fa0/x
+	  no shutdown
+
+	interface fa0/x.<vlan-id>
+	  encapsulation dot1q <vlan-id> [native]
+	  ip address <IP> <SM>
+
+#### Clear Switch
+
+	delete vlan.dat
+	erase startup-config
+
+Check:
+	show vlan
+
+If previous VLAN configuration information is still present (other than the default management VLAN 1), you must power-cycle the switch (hardware restart) instead of issuing the reload command. To powercycle the switch, remove the power cord from the back of the switch or unplug it, and then plug it back in.
+
+	power cycle
+	! or 
+	reload
+
+#### Manage IOS and Config on Switch
+
+	show version
+	show flash
+	cd flash:/<dir>
+
+	copy flash tftp
+	copy tftp flash
+
+	copy startup-config tftp
+	erase nvram
+	copy tftp statup-config
+
+	show boot
+	rename flash:/... flash:/
+	dir flash:/
+
+	delete flash:/.../html/
+
+	archive tar /x tftp://<TFTP>/<FILE> flash:/dir
+
+	boot sysytem flash:/...
