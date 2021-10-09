@@ -1,4 +1,4 @@
-baseurl: http://cisco.swordfischer.me
+baseurl: https://cisco.swordfischer.com
 permalink: /:categories/:title/
 highlighter: pygments
 markdown: kramdown
